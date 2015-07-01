@@ -1,0 +1,16 @@
+interface ImageProc {
+    // Rotate image at URL
+    rotate(angle float, url string) string
+    
+    // Resize image at URL
+    resize(scale float, url string) string
+
+    // Blue image at URL
+    blur(amount float, url string) string
+
+   // convert image at URL
+    convert(fileExt string, url string) string
+
+    // generate a "meme"-style subtitle to an image
+    memeGenerate(topText string, bottomText string, url string) string
+}

@@ -1,0 +1,19 @@
+# Name for the service - we recommend using CamelCase
+name: example-python
+
+# A unique name to identify the author
+author: StackHut
+
+# A contact email address
+contact: huts@stackhut.com
+
+# description of the service
+description: Demo project in Python
+
+# stack we use, in terms of the OS and language runtime
+baseos: fedora
+stack: python2
+
+# a list of files we wish to copy into the image
+files: 
+    - example_request.json
