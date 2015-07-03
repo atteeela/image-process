@@ -7,39 +7,34 @@ A wrapper around GM commands for now
 import os
 import requests
 from PIL import ImageFont, Image, ImageDraw
-import stackhut
-from stackhut.stackhut import *  # user code imports
+import stackhut  # stackhut services - accessed over JSON-RPC localhost server??
 
 class ImageProcService:
-    def __init__(self, task_id, bucket):
-        self.task_id = task_id
-        self.bucket = bucket
-
     def _run_gm_command(self, cmd_list, in_url, new_ext=None):
         # get input file
-        in_file = download_file(in_url)
-        out_file = "out_{}".format(in_file)
+        in_file = stackhut.download_file(in_url)
+        out_file = os.path.join("output", in_file)
 
         if new_ext is not None:
             out_file = "{}.{}".format(os.path.splitext(out_file)[0], new_ext)
 
         # run GM command
-        call_strings(cmd_list + [in_file, out_file],  '')
+        sh.gm(cmd_list + [in_file, out_file])
         # save back to S3
-        out_url = upload_file(out_file, self.task_id, self.bucket)
-        return out_url
+        # out_url = upload_file(out_file, self.task_id, self.bucket)
+        return stackhut.get_out_url(out_file)
 
     def blur(self, amount, url):
-        return self._run_gm_command(['/usr/bin/gm', 'convert', '-blur', str(amount)], url)
+        return self._run_gm_command(['convert', '-blur', str(amount)], url)
 
     def resize(self, scale, url):
-        return self._run_gm_command(['/usr/bin/gm', 'convert', '-resize', '{}%'.format(scale*100)], url)
+        return self._run_gm_command(['convert', '-resize', '{}%'.format(scale*100)], url)
 
     def rotate(self, angle, url):
-        return self._run_gm_command(['/usr/bin/gm', 'convert', '-rotate', str(angle)], url)
+        return self._run_gm_command(['convert', '-rotate', str(angle)], url)
 
     def convert(self, fileExt, url):
-        return self._run_gm_command(['/usr/bin/gm', 'convert'], url, fileExt)
+        return self._run_gm_command(['convert'], url, fileExt)
 
     def memeGenerate(self, topText, bottomText, url):
         """taken and adapted from ..."""
@@ -47,7 +42,8 @@ class ImageProcService:
         bottom_text = bottomText.upper()
 
         in_file = download_file(url)
-        out_file = "out_{}".format(in_file)
+        out_file = os.path.join("output", in_file)
+
         img = Image.open(in_file)
         image_size = img.size
 
@@ -86,12 +82,8 @@ class ImageProcService:
 
         # save final image
         img.save(out_file)
-        out_url = upload_file(out_file, self.task_id, self.bucket)
-        return out_url
+        # out_url = upload_file(out_file, self.task_id, self.bucket)
+        return stackhut.get_out_url(out_file)
 
+SERVICES = {"Default" : ImageProcService()}
 
-
-if __name__ == "__main__":
-    stack = Stack()
-    stack.add_handler("ImageProc", ImageProcService(stack.task_id, stack.bucket))
-    stack.run()

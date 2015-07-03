@@ -1,9 +1,7 @@
-# Python Stack
+# Image Processing Service
 
-A Python 3 stack
+An image processing service that includes many basic and more advanced image manipulation functions.
 
 ## Usage
-* Edit the `Hutfile` to describe your service parameters
-* Edit the `service.idl` to describe the service interface
-* Edit `app.py` to implement your desired service interface
-* Dev, run and push using the `stackhut` app
+* TODO
+

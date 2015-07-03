@@ -1,4 +1,4 @@
-interface ImageProc {
+interface Default {
     // Rotate image at URL
     rotate(angle float, url string) string
     

@@ -1,5 +1,5 @@
-# Name for the service - we recommend using CamelCase
-name: example-python
+# Name for the service - we recommend using snake-case
+name: image-processing
 
 # A unique name to identify the author
 author: StackHut
@@ -8,12 +8,17 @@ author: StackHut
 contact: huts@stackhut.com
 
 # description of the service
-description: Demo project in Python
+description: Image Processing Service
 
 # stack we use, in terms of the OS and language runtime
 baseos: fedora
-stack: python2
+stack: python
 
-# a list of files we wish to copy into the image
+# any OS packages we require within the stack
+os_deps:
+    - graphicsmagick
+    - python3-pillow
+
+# a list of files/dirs we wish to copy into the image
 files: 
-    - example_request.json
+    - example_request.json res
