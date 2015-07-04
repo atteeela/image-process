@@ -7,22 +7,29 @@ A wrapper around GM commands for now
 import os
 import requests
 from PIL import ImageFont, Image, ImageDraw
-import stackhut  # stackhut services - accessed over JSON-RPC localhost server??
+from sh import gm
+import stackhut
 
 class ImageProcService:
+    def __init__(self):
+        self.res_dir = os.path.join(stackhut.root_dir, 'res')
+
+    def get_res(self, name):
+        return os.path.join(self.res_dir, name)
+
     def _run_gm_command(self, cmd_list, in_url, new_ext=None):
         # get input file
         in_file = stackhut.download_file(in_url)
-        out_file = os.path.join("output", in_file)
+        out_file = "out_{}".format(in_file)
 
         if new_ext is not None:
             out_file = "{}.{}".format(os.path.splitext(out_file)[0], new_ext)
 
         # run GM command
-        sh.gm(cmd_list + [in_file, out_file])
+        gm(cmd_list + [in_file, out_file])
         # save back to S3
         # out_url = upload_file(out_file, self.task_id, self.bucket)
-        return stackhut.get_out_url(out_file)
+        return stackhut.put_file(out_file)
 
     def blur(self, amount, url):
         return self._run_gm_command(['convert', '-blur', str(amount)], url)
@@ -41,20 +48,20 @@ class ImageProcService:
         top_text = topText.upper()
         bottom_text = bottomText.upper()
 
-        in_file = download_file(url)
-        out_file = os.path.join("output", in_file)
+        in_file = stackhut.download_file(url)
+        out_file = "out_{}".format(in_file)
 
         img = Image.open(in_file)
         image_size = img.size
 
         # find biggest font size that works
         font_size = int(image_size[1]/5)
-        font = ImageFont.truetype("./res/Impact.ttf", font_size)
+        font = ImageFont.truetype(self.get_res("Impact.ttf"), font_size)
         top_text_size = font.getsize(top_text)
         bottom_text_size = font.getsize(bottom_text)
         while top_text_size[0] > image_size[0]-20 or bottom_text_size[0] > image_size[0]-20:
             font_size -= 1
-            font = ImageFont.truetype("./res/Impact.ttf", font_size)
+            font = ImageFont.truetype(self.get_res("Impact.ttf"), font_size)
             top_text_size = font.getsize(top_text)
             bottom_text_size = font.getsize(bottom_text)
 
@@ -83,7 +90,7 @@ class ImageProcService:
         # save final image
         img.save(out_file)
         # out_url = upload_file(out_file, self.task_id, self.bucket)
-        return stackhut.get_out_url(out_file)
+        return stackhut.put_file(out_file)
 
 SERVICES = {"Default" : ImageProcService()}
 

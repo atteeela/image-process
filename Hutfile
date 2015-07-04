@@ -1,5 +1,5 @@
 # Name for the service - we recommend using snake-case
-name: image-processing
+name: image-process
 
 # A unique name to identify the author
 author: StackHut
@@ -8,7 +8,7 @@ author: StackHut
 contact: huts@stackhut.com
 
 # description of the service
-description: Image Processing Service
+description: Image Processing Slservice
 
 # stack we use, in terms of the OS and language runtime
 baseos: fedora
@@ -16,9 +16,10 @@ stack: python
 
 # any OS packages we require within the stack
 os_deps:
-    - graphicsmagick
+    - GraphicsMagick
     - python3-pillow
 
 # a list of files/dirs we wish to copy into the image
 files: 
-    - example_request.json res
+    - example_request.json
+    - res
