@@ -3,5 +3,5 @@
 An image processing service that includes many basic and more advanced image manipulation functions.
 
 ## Usage
-* TODO
+* Look at the `service.idl` file to see what functions are available, friend.
 
