@@ -1,11 +1,8 @@
 # Name for the service - we recommend using snake-case
 name: image-process
 
-# A unique name to identify the author
-author: StackHut
-
-# A contact email address
-contact: huts@stackhut.com
+# GitHub URL to the project
+github_url: https://github.com/StackHut/image-process
 
 # description of the service
 description: Image Processing Slservice
