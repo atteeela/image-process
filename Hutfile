@@ -18,5 +18,4 @@ os_deps:
 
 # a list of files/dirs we wish to copy into the image
 files: 
-    - example_request.json
     - res

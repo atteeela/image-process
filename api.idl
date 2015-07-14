@@ -1,4 +1,10 @@
 interface Default {
+    // convert image at URL
+    convert(fileExt string, url string) string
+
+    // generate a "meme"-style subtitle to an image
+    memeGenerate(topText string, bottomText string, url string) string
+
     // Rotate image at URL
     rotate(angle float, url string) string
     
@@ -7,10 +13,4 @@ interface Default {
 
     // Blue image at URL
     blur(amount float, url string) string
-
-   // convert image at URL
-    convert(fileExt string, url string) string
-
-    // generate a "meme"-style subtitle to an image
-    memeGenerate(topText string, bottomText string, url string) string
 }
