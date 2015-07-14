@@ -2,6 +2,6 @@
     "serviceName": "image-process",
     "req": {
         "method": "memeGenerate",
-        "params": ["I'm not saying it is containers...", "...but it is containers", "https://raw.githubusercontent.com/danieldiekmeier/memegenerator/master/aliens.jpg"]
+        "params": ["I'm not saying it's containers...", "...but it's containers", "https://raw.githubusercontent.com/danieldiekmeier/memegenerator/master/aliens.jpg"]
     }
 }
