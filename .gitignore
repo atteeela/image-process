@@ -1,8 +1,8 @@
 .stackhut.log
 *.json
-local_task
+!test_request.json
+run_result
 .stackhut
-
 
 # ide
 *.iml
