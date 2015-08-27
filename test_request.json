@@ -1,5 +1,5 @@
 {
-    "service": "mands/image-process",
+    "service": "stackhut/image-process",
     "request": {
         "method": "memeGenerate",
         "params": ["I'm not saying it's containers...", "...but it's containers", "https://raw.githubusercontent.com/danieldiekmeier/memegenerator/master/aliens.jpg"]
