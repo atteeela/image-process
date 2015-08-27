@@ -10,7 +10,7 @@ from PIL import ImageFont, Image, ImageDraw
 from sh import gm
 import stackhut
 
-class ImageProcService:
+class ImageProc(stackhut.Service):
     def __init__(self):
         self.res_dir = os.path.join(stackhut.root_dir, 'res')
 
@@ -92,5 +92,5 @@ class ImageProcService:
         # out_url = upload_file(out_file, self.task_id, self.bucket)
         return stackhut.put_file(out_file)
 
-SERVICES = {"Default" : ImageProcService()}
+SERVICES = {"Default" : ImageProc()}
 
