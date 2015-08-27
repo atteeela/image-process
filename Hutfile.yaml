@@ -1,15 +1,13 @@
-# Name for the service - we recommend using snake-case
+# Service name (a combination of lower case letters, numbers, and dashes)
 name: image-process
 
-author: mands
+# Service description
+description: Image Processing Service
 
 # GitHub URL to the project
 github_url: https://github.com/StackHut/image-process
 
-# description of the service
-description: Image Processing Slservice
-
-# stack we use, in terms of the OS and language runtime
+# The service dependencies, in terms of the base OS and language runtime
 baseos: fedora
 stack: python
 
@@ -21,3 +19,10 @@ os_deps:
 # a list of files/dirs we wish to copy into the image
 files: 
     - res
+
+# Persist the service between requests
+persistent: True
+
+# Restrict service access to authenticated users
+private: True
+
