@@ -14,18 +14,23 @@
 #### `Default` Interface
 
 * `convert(fileExt string, url string) string`
+
     convert image at URL
 
 * `memeGenerate(topText string, bottomText string, url string) string`
+
     generate a "meme"-style subtitle to an image
 
 * `rotate(angle float, url string) string`
+
     Rotate image at URL
     
 * `resize(scale float, url string) string`
+
     Resize image at URL
 
 * `blur(amount float, url string) string`
+
     Blur image at URL
 
 
@@ -78,7 +83,8 @@ interface Default {
 
     // Blur image at URL
     blur(amount float, url string) string
-}```
+}
+```
 
 
 ### Service Configuration (`Hutfile.yaml`)
@@ -90,7 +96,6 @@ Here we configure the service to include the `GraphicsMagick` and `python3-pillo
 
 Finally let's look at the `files` field, this is a list of files within the project directory that you wish to package up within the service for deployment.
 This list can be either individual files or directories, in which case the entire contests of the directory is included. (Note, you must explicitly list additional files within this field to ensure they exist during testing and deployment. By default only the basic project files are packaged up.)
-
 
 
 ```yaml
