@@ -11,6 +11,6 @@ interface Default {
     // Resize image at URL
     resize(scale float, url string) string
 
-    // Blue image at URL
+    // Blur image at URL
     blur(amount float, url string) string
 }
