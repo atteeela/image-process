@@ -52,7 +52,7 @@ This Python-based service demonstrates the following features,
 
 * File manipulation
 * OS and language dependencies
-* Embedding resource files within a service
+* Embedding and accessing resource files within a service
 
 We also recommend looking at other, more detailed, examples of using StackHut to [convert PDF files](https://github.com/StackHut/pdf-tools) and [render webpages headless-ly](https://github.com/StackHut/web-tools).
 
@@ -144,5 +144,9 @@ As mentioned previously, we indicating a dependency upon the `GraphicsMagick` Fe
 To process images with GraphicsMagick we need to be able to call the `gm` binary from within our service function. Generally this is done by using your language's process management features to execute the binary as a sub-process. 
 When using Python we recommend and use the [sh](https://amoffat.github.com/sh) package that presents a simple way to call external binaries from within your service. 
 However it's important to note that techniques exist in every language to call an binary embedded within the service - your service is running in a secure, custom container and you can do anything as needed inside it.
+
+#### Root Directory
+
+We use the [StackHut runtime functions](http://stackhut.readthedocs.org/en/latest/creating_service/service_runtime.html) to obtain the location of the service on the filesystem from `stackhut.root_dir`. This is used to reference embedded resource files, in this case embedded fonts needed by the `memeGenerate` function.
 
 
